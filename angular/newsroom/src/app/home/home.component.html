@@ -1,0 +1,133 @@
+<div class="min-height container-fluid">
+
+  <div class="search mt-4">
+    <form class="search-form">
+      <input type="text" placeholder="Search for User By Name" #searchArticle>
+      <input type="submit" value="Search Article By Keyword" (click)="search(searchArticle.value)" style="cursor: pointer;">
+    </form>
+  </div>
+
+
+  <div class="mt-1">
+    <button class="btn-sm btn-primary float-left inline mb-0 text-center" (click)="getFavoriteArticle()" style="cursor: pointer;">Favorite
+      Article</button>
+    <button class="btn-sm btn-primary float-left inline mb-0 ml-2 text-center" (click)="ngOnInit()" style="cursor: pointer;">Top
+      Article</button>
+    <br>
+  </div>
+  <hr class="hr12">
+
+  <ng-container *ngIf="newsSearched == 'top'; else newsNotSearched1">
+    <h3 class="text-center text-capitalize">Top Articles</h3>
+  </ng-container>
+  <ng-template #newsNotSearched1>
+    <ng-container *ngIf="newsSearched == 'favorite'; else newsNotSearched2">
+      <h3 class="text-center text-capitalize">Favorite Article</h3>
+    </ng-container>
+    <ng-template #newsNotSearched2>
+      <h3 class="text-center text-capitalize">News Seached For "{{searchKeys}}"</h3>
+    </ng-template>
+  </ng-template>
+  <hr class="hr12">
+
+  <ng-container *ngIf="dataCollected; else elseTemplate">
+    <ng-container *ngIf="news.articles.length == 0; else articlesAreThere">
+        <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column ">
+                  <h3 class="mb-0">
+                    <a class="text-dark" href="#">No Article Found in the Top-Headlines</a>
+                  </h3>
+                </div>  
+              </div>
+            </div>
+          </div>
+    </ng-container>
+    <ng-template #articlesAreThere>          
+    <div class="container mt-4  ">
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-12 px-0">
+          <strong class="mb-2 text-primary">
+            <span class="float-left">Featured</span>
+            <span class="text-success float-right">{{news.articles[0].source.name}}</span>
+          </strong><br>
+          <h1 class="display-4 font-italic">{{news.articles[0].title}}</h1>
+          <p class="lead my-3">{{news.articles[0].description}}</p>
+          <p class="lead mb-0"><a href="{{news.articles[0].url}}" class="text-white font-weight-bold" target="blank">Continue
+              reading...</a></p>
+        </div>
+        <!-- <div class=" col-md-4 px-0">
+          <img class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="300" height="250" src="{{news.articles[1].urlToImage}}"
+            preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+        </div> -->
+      </div>
+
+      <div class="row mb-2" *ngFor="let item of news.articles; let i=index">
+        <div class="col-md-12">
+          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+            <div class="card-body d-flex flex-column ">
+              <strong class="d-inline mb-2 text-primary">
+                <span class="float-left">{{item.source.name}}</span>
+                <!-- <i class="far fa-heart"></i> -->
+                <span class="text-success float-right">{{item.author}}</span>
+              </strong>
+              <h3 class="mb-0">
+                <a class="text-dark" href="#">{{item.title}}</a>
+              </h3>
+              <div class="mb-1 text-muted">{{item.publishedAt}}</div>
+              <p class="card-text mb-auto text-owerflow">{{item.description}}</p>
+              <span class="d-inline">
+                <a href="{{item.url}}" target="blank" class="float-left">Continue reading</a>
+
+                <!-- [ngClass]="clickToFav ? 'far fa-star float-right' :  'fas fa-star float-right'" -->
+                <i [ngClass]="{'far fa-star float-right': true}" (click)="addToFavorite(item)" #favorite style="cursor: pointer;">Favorite
+                  It</i>
+                <!-- <a class="" >Add To Fav</a> -->
+              </span>
+            </div>
+            <img class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="300" height="250" src="{{item.urlToImage}}"
+              preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+          
+  </ng-template>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="row mb-2" *ngFor="let item of news">
+      <div class="col-md-12">
+        <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+          <div class="card-body d-flex flex-column ">
+            <strong class="d-inline mb-2 text-primary">
+              <span class="float-left">{{item.source}}</span>
+              <!-- <i class="far fa-heart"></i> -->
+              <span class="text-success float-right">{{item.author}}</span>
+            </strong>
+            <h3 class="mb-0">
+              <a class="text-dark" href="#">{{item.title}}</a>
+            </h3>
+            <div class="mb-1 text-muted">{{item.publishedAt}}</div>
+            <p class="card-text mb-auto text-owerflow">{{item.description}}</p>
+            <span class="d-inline">
+              <a href="{{item.url}}" target="blank" class="float-left">Continue reading</a>
+              <!-- <i class="far fa-star float-right" (click)="addToFavorite(item)" style="cursor: pointer;"> Add To Fav</i> -->
+              <i class="far fa-trash-alt float-right" (click)="removeFromFavorite(item)" style="cursor: pointer;"></i>
+              <!-- <a class="" >Add To Fav</a> -->
+            </span>
+          </div>
+          <img class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="300" height="250" src="{{item.urlToImage}}"
+            preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+
+
+
+
+<!--  -->

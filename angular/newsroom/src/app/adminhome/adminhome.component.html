@@ -1,0 +1,58 @@
+<div class="min-height container">
+  <div class="search mt-4">
+    <form class="search-form">
+      <input type="text" placeholder="Search for User By Name" #searchUser>
+      <input type="submit" value="Search User" (click)="search(searchUser.value)">
+    </form>
+  </div>
+
+
+  <div class="container mb-4">
+    <br>
+    <div>
+      <p class="text-center mb-0">All Users</p>
+      <div class="mt-0">
+      <p class="float-left inline mb-0">Click to toggle UserStatus</p>
+      <p class="float-right inline mb-0"><span class="text-danger">Red</span>:= Blacklisted User</p>
+      <br>
+      </div>
+    </div>
+    <hr class="hr12">
+    <div class="row">
+
+      <aside class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let item of user">
+
+        <!-- style="background-image: url('http://bootstrap-ecommerce.com/main/images/posts/1.jpg');" -->
+        <ng-container *ngIf="item.userStatus == 'A'; else elseTemplate">
+          <div class="card-banner overlay-grad mt-0 mb-3" (click)="activate(item)">
+            <div class="card-body text-white" style="overflow-wrap: break-word; width: 109px">
+              <h5 class="card-title text-center text-capitalize mb-0">{{item.name}}</h5>
+              <a href="mailto:{{item.email}}">
+                <p class="card-text text-center mt-0">{{item.email}}</p>
+              </a>
+              <h6 class="card-title text-center text-capitalize mt-3 mb-0">{{item.language.name}}</h6>
+              <p class="card-text text-center mt-0 font-10px" (click)="toggleRole(user)" *ngIf="item.role.name == 'NA'">News Analyst</p>
+              <p class="card-text text-center mt-0 font-10px" (click)="toggleRole(user)" *ngIf="item.role.name == 'AD'">Admin</p>
+            </div>
+          </div>
+
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="card-banner overlay-grad1 mt-0 mb-3" (click)="activate(item)">
+            <div class="card-body text-white" style="overflow-wrap: break-word; width: 109px">
+              <h5 class="card-title text-center text-capitalize mb-0">{{item.name}}</h5>
+              <a href="mailto:{{item.email}}">
+                <p class="card-text text-center mt-0">{{item.email}}</p>
+              </a>
+              <h6 class="card-title text-center text-capitalize mt-3 mb-0">{{item.language.name}}</h6>
+              <p class="card-text text-center mt-0 font-10px" (click)="toggleRole(user)" *ngIf="item.role.name == 'NA'">News Analyst</p>
+              <p class="card-text text-center mt-0 font-10px" (click)="toggleRole(user)" *ngIf="item.role.name == 'AD'">Admin</p>
+            </div>
+          </div>
+        </ng-template>
+      </aside>
+    </div>
+
+  </div>
+
+</div>

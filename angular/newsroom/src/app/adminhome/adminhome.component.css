@@ -1,0 +1,135 @@
+.hr12 {
+  margin-top: 0rem;
+  margin-bottom: 7px;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+.font-10px{
+  font-size: 10px;
+  cursor: pointer;
+}
+.card-banner {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.card-banner .card-body {
+  background-size: cover;
+  position: relative;
+  z-index: 10;
+}
+
+
+/* overlay effects */
+.overlay-cover {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 10;
+  padding: 1.25rem;
+  color: #fff;
+}
+
+.overlay-grad {
+  position: relative;
+}
+
+.overlay-grad::before {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e83e8c;
+  background: -webkit-gradient(linear, left top, right bottom, from(#007bff), to(#e83e8c));
+  background: linear-gradient(to bottom right, #007bff, #e83e8c);
+  opacity: .6;
+  transition: .5s;
+}
+
+.overlay-grad1::before {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: red;
+  opacity: .6;
+  transition: .5s;
+}
+
+.overlay-grad1:hover:before {
+  opacity: .9;
+  cursor: pointer;
+}
+
+
+.overlay-grad:hover:before {
+  opacity: .9;
+  cursor: pointer;
+}
+
+/* ===========================
+   ====== Search Box ====== 
+   =========================== */
+
+.search {
+  border: 2px solid palevioletred;
+  overflow: auto;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.search input[type="text"] {
+  border: 0px;
+  width: 67%;
+  padding: 10px 10px;
+}
+
+.search input[type="text"]:focus {
+  outline: 0;
+}
+
+.search input[type="submit"] {
+  border: 0px;
+  background: none;
+  background-color: palevioletred;
+  color: #fff;
+  float: right;
+  padding: 10px;
+  border-radius-top-right: 5px;
+  -moz-border-radius-top-right: 5px;
+  -webkit-border-radius-top-right: 5px;
+  border-radius-bottom-right: 5px;
+  -moz-border-radius-bottom-right: 5px;
+  -webkit-border-radius-bottom-right: 5px;
+  cursor: pointer;
+}
+
+/* ===========================
+      ====== Medua Query for Search Box ====== 
+      =========================== */
+
+@media only screen and (min-width : 150px) and (max-width : 780px) {
+  .search {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+}

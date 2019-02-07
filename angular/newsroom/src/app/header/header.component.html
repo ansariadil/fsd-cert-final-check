@@ -1,0 +1,22 @@
+<header class="header-login-signup">
+	<div class="header-limiter">
+		<h1><a href="/">news<span>ROOM</span></a></h1>
+		<!-- <nav>
+			<a href="/" class="selected">Home</a>
+		</nav> -->
+
+		<ng-container *ngIf="authService.loggedIn; else elseTemplate">
+			<ul class="mt-3">
+				<li *ngIf="authService.role == 'NA'"><a [routerLink]="['home']">Home</a></li>
+				<li *ngIf="authService.role == 'AD'"><a [routerLink]="['adminhome']">Home</a></li>
+				<li style="cursor: pointer;"><a (click)="logout()">Log Out</a></li>
+			</ul>
+		  </ng-container>
+		  <ng-template #elseTemplate>
+			<ul class="mt-3">
+				<li><a [routerLink]="['login']">Login</a></li>
+				<li><a [routerLink]="['signup']">Sign up</a></li>
+			</ul>
+		  </ng-template>
+	</div>
+</header>

@@ -1,0 +1,100 @@
+<div class="min-height container-fluid mb-1">
+  <div class="login-wrap">
+    <div class="login-html">
+      <!-- <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label> -->
+      <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
+      <div class="login-form">
+        <!-- <div class="sign-in-htm" [formGroup]="loginForm">
+          <div class="group">
+            <label for="user" class="label">Email</label>
+            <input type="text" id="email" class="input" placeholder="Email Address" formControlName="email" required autofocus>
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <input type="password" data-type="password" id="password" class="input" placeholder="Password" formControlName="password" required>
+          </div>
+          <div class="group">
+            <input id="check" type="checkbox" class="check" checked>
+            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+          </div>
+          <div class="group">
+            <input type="submit" class="button" value="Sign In" (click)="submit(loginForm)">
+          </div>
+          <div class="hr"></div>
+        </div> -->
+        <div class="sign-up-htm">
+          <div *ngIf="!signupSuccess">
+            <ng-container *ngIf="signupStatus.emailExist; else notRegistered">
+              <div class="col-12">
+                <div class="alert alert-danger" id="signup-submission-error">
+                  Error On Submission! <br>
+                  {{signupStatus.message}} 
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #notRegistered>
+              <div class="col-12">
+                <div class="alert alert-success">
+                  {{signupStatus.message}}
+                  <a [routerLink]="[ '/login']">Click here to Login</a>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+
+          <form [formGroup]="signupForm">
+            <div class="group">
+              <label for="name" class="label">Name</label>
+              <input id="name" type="text" class="input" formControlName="name">
+              <div *ngIf="signupForm.get('name').touched && signupForm.get('name').invalid">
+                <div *ngIf="signupForm.get('name').errors.required" class="alert-danger">Name is required</div>
+                <div *ngIf="signupForm.get('name').errors.minlength" class="alert-danger">Name should be of min langth
+                  3</div>
+              </div>
+            </div>
+            <div class="group">
+              <label for="email" class="label">Email Address</label>
+              <input id="email" type="text" class="input" formControlName="email">
+              <div *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid">
+                <div *ngIf="signupForm.get('email').errors.required" class="alert-danger">Email is required</div>
+                <div *ngIf="signupForm.get('email').errors.minlength" class="alert-danger">Email should be of min
+                  langth 3</div>
+              </div>
+            </div>
+            <div class="group">
+              <label for="password" class="label">Password</label>
+              <input id="password" type="password" class="input" data-type="password" formControlName="password">
+              <div *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid">
+                <div *ngIf="signupForm.get('password').errors.required" class="alert-danger">Password is required</div>
+                <div *ngIf="signupForm.get('email').errors.minlength" class="alert-danger">Password should be of min
+                  langth 3</div>
+              </div>
+            </div>
+
+            <div class="group" formGroupName="language">
+              <label for="language" class="label">Select Your Language</label>
+              <!-- <input id="language" type="text" class="input" formControlName="language"> -->
+              <select class="input" formControlName="id" id="languageId" >
+                <option *ngFor="let language of languageList" class="label input" [value]="language.id">{{language.name}}</option>
+              </select>
+              <div *ngIf="signupForm.get('language.id').touched && signupForm.get('language.id').invalid">
+                <div *ngIf="signupForm.get('language.id').errors.required" class="alert-danger">Please Select a
+                  Language</div>
+              </div>
+
+            </div>
+
+            <div class="group">
+              <button id="signup-button" type="submit" class="button" (click)="signup(signupForm)">Sign Up</button>
+              <!-- <input type="submit" class="button" value="Sign Up"> -->
+            </div>
+          </form>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <label [routerLink]="[ '/login']">Already Member?</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
